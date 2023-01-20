@@ -61,7 +61,7 @@ const Dashboard = () => {
                         <div>Rp. {item.saldo}</div>
                       </CTableDataCell>
                       <CTableDataCell>
-                        { item.bpr_id === "1001" ? (
+                        {item.bpr_id === '1001' ? (
                           <CButton
                             component="a"
                             color="primary"

@@ -16,7 +16,7 @@ import {
   // cilBell,
   // cilEnvelopeOpen,
   // cilList,
-  cilMenu
+  cilMenu,
 } from '@coreui/icons'
 
 import { AppBreadcrumb } from './index'
@@ -69,9 +69,7 @@ const AppHeader = () => {
             </CNavLink>
           </CNavItem> */}
         </CHeaderNav>
-        <CHeaderNav className="ms-3">
-          {/* <AppHeaderDropdown /> */}
-        </CHeaderNav>
+        <CHeaderNav className="ms-3"></CHeaderNav>
       </CContainer>
       <CHeaderDivider />
       <CContainer fluid>
