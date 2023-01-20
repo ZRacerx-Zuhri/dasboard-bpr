@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 import {
   CCard,
@@ -16,22 +17,27 @@ import {
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 import { cilLoopCircular } from '@coreui/icons'
-import { useFetch } from '../../action'
+// import { useFetch } from '../../action'
 
 const Dashboard = () => {
+  const navigate = useNavigate()
   const [bpr, setBpr] = useState([])
-  const url = 'https://gw-dev-api.medtransdigital.com/dashboard/list_bpr'
-  useFetch({ url, onSuccess: (data) => setBpr(data.data) })
+  // const url = 'https://gw-dev-api.medtransdigital.com/dashboard/list_bpr'
+  // useFetch({ url, onSuccess: (data) => setBpr(data.data) })
 
-  // useEffect(() => {
-  //   console.log(data)
-  //   if (data == bpr) {
-  //     fetch()
-  //       .then((response) => response.json())
-  //       .then((data) => setBpr(data.data))
-  //   }
-  // }, bpr)
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    navigate('/dashboard/detail', { state: {} })
+  }
 
+  useEffect(() => {
+    fetch('https://gw-dev-api.medtransdigital.com/dashboard/list_bpr')
+      .then((res) => res.json())
+      .then((res) => {
+        setBpr(res.data)
+      })
+      .catch((err) => console.error(err))
+  }, [])
   return (
     <>
       <CRow>
@@ -62,13 +68,7 @@ const Dashboard = () => {
                       </CTableDataCell>
                       <CTableDataCell>
                         {item.bpr_id === '1001' ? (
-                          <CButton
-                            component="a"
-                            color="primary"
-                            href="#/dashboard/detail"
-                            role="button"
-                            className="me-2"
-                          >
+                          <CButton color="primary" className="me-2" onClick={handleSubmit}>
                             Detail
                           </CButton>
                         ) : (

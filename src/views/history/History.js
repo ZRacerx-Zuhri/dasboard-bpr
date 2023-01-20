@@ -186,12 +186,7 @@ const History = () => {
                   <option>2023</option>
                 </CFormSelect>
               </CCol>
-              <CButton
-                type="submit"
-                className="mt-4"
-                href="#/detail/history"
-                onClick={handleSubmit}
-              >
+              <CButton type="submit" className="mt-4" onClick={handleSubmit}>
                 Search
               </CButton>
             </CForm>

@@ -19,8 +19,7 @@ import {
 const DetailHistory = () => {
   const location = useLocation()
   const [trans, setTrans] = useState([])
-  let tcode = location.state.userChoice
-  const url = `https://gw-dev-api.medtransdigital.com/dashboard/get_trans?bpr_id=2640&tcode=${tcode}`
+  const url = `https://gw-dev-api.medtransdigital.com/dashboard/get_trans?bpr_id=2640&tcode=${location.state.userChoice}`
   useFetch({ url, onSuccess: (data) => setTrans(data.data) })
 
   return (
