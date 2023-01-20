@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
-import { useFetch } from '../../../action'
+// import { useFetch } from '../../../action'
 
 import {
   CCard,
@@ -19,8 +19,18 @@ import {
 const DetailHistory = () => {
   const location = useLocation()
   const [trans, setTrans] = useState([])
-  const url = `https://gw-dev-api.medtransdigital.com/dashboard/get_trans?bpr_id=2640&tcode=${location.state.userChoice}`
-  useFetch({ url, onSuccess: (data) => setTrans(data.data) })
+  // const url = `https://gw-dev-api.medtransdigital.com/dashboard/get_trans?bpr_id=2640&tcode=${location.state.userChoice}`
+  // useFetch({ url, onSuccess: (data) => setTrans(data.data) })
+  useEffect(() => {
+    fetch(
+      `https://gw-dev-api.medtransdigital.com/dashboard/get_trans?bpr_id=${location.state.bprChoice}&tcode=${location.state.transChoice}`,
+    )
+      .then((res) => res.json())
+      .then((res) => {
+        setTrans(res.data)
+      })
+      .catch((err) => console.error(err))
+  })
 
   return (
     <>

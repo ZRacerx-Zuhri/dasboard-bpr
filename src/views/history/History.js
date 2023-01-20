@@ -17,20 +17,26 @@ import {
 } from '@coreui/react'
 
 const History = () => {
-  const [userChoice, setUserChoice] = useState('')
+  const [bprChoice, setBprChoice] = useState('')
+  const [transChoice, setTransChoice] = useState('')
 
   const navigate = useNavigate()
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    if (userChoice !== '') {
-      navigate('/history/detail', { state: { userChoice } })
+    if (bprChoice !== '' && transChoice !== '') {
+      navigate('/history/detail', { state: { bprChoice, transChoice } })
     }
   }
 
-  const handleChange = (e) => {
+  const handleChange1 = (e) => {
     console.log(e.target.value)
-    setUserChoice(e.target.value)
+    setBprChoice(e.target.value)
+  }
+
+  const handleChange2 = (e) => {
+    console.log(e.target.value)
+    setTransChoice(e.target.value)
   }
 
   return (
@@ -44,15 +50,17 @@ const History = () => {
             <CForm className="row g-3">
               <CCol xs={12}>
                 <CFormLabel htmlFor="inputState">Pilih BPR</CFormLabel>
-                <CFormSelect id="inputState">
-                  <option>BPR Angga</option>
+                <CFormSelect id="inputState" onChange={handleChange1}>
+                  <option value="">-</option>
+                  <option value="2640">BPR Angga</option>
+                  <option value="0931">BPR Garut</option>
                   {/* <option>BPR Garut</option> */}
                 </CFormSelect>
               </CCol>
               <CCol xs={12}>
                 <CFormLabel htmlFor="inputState">Jenis Transaksi</CFormLabel>
-                <CFormSelect id="inputState" onChange={handleChange}>
-                  <option value=""></option>
+                <CFormSelect id="inputState" onChange={handleChange2}>
+                  <option value="">-</option>
                   <option value="1%">Tarik Tunai</option>
                   <option value="5%">PPOB</option>
                   <option value="2%">Transfer</option>
