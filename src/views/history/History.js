@@ -19,7 +19,6 @@ import {
 const History = () => {
   const [bprChoice, setBprChoice] = useState('')
   const [transChoice, setTransChoice] = useState('')
-  const [detail, setDetail] = useState('')
 
   const navigate = useNavigate()
 

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useLocation } from 'react-router-dom'
+// import { useLocation } from 'react-router-dom'
 // import { useFetch } from '../../../action'
 
 import {
@@ -18,8 +18,8 @@ import {
 } from '@coreui/react'
 
 const DetailPpob = () => {
-  const location = useLocation()
   const [trans, setTrans] = useState([])
+  console.log(setTrans)
   // const url = `https://gw-dev-api.medtransdigital.com/dashboard/get_trans?bpr_id=2640&tcode=${location.state.userChoice}`
   // useFetch({ url, onSuccess: (data) => setTrans(data.data) })
   useEffect(() => {
