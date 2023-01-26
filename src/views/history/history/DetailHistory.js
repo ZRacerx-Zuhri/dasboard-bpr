@@ -3,6 +3,7 @@ import { useLocation } from 'react-router-dom'
 // import { useFetch } from '../../../action'
 
 import {
+  CButton,
   CCard,
   CCardBody,
   CCardHeader,
@@ -16,20 +17,20 @@ import {
   CTableRow,
 } from '@coreui/react'
 
-const DetailHistory = () => {
+const DetailPpob = () => {
   const location = useLocation()
   const [trans, setTrans] = useState([])
   // const url = `https://gw-dev-api.medtransdigital.com/dashboard/get_trans?bpr_id=2640&tcode=${location.state.userChoice}`
   // useFetch({ url, onSuccess: (data) => setTrans(data.data) })
   useEffect(() => {
-    fetch(
-      `https://gw-dev-api.medtransdigital.com/dashboard/get_trans?bpr_id=${location.state.bprChoice}&tcode=${location.state.transChoice}`,
-    )
-      .then((res) => res.json())
-      .then((res) => {
-        setTrans(res.data)
-      })
-      .catch((err) => console.error(err))
+    // fetch(
+    //   `https://gw-dev-api.medtransdigital.com/dashboard/get_trans?bpr_id=${location.state.bprChoice}&tcode=${location.state.transChoice}`,
+    // )
+    //   .then((res) => res.json())
+    //   .then((res) => {
+    //     setTrans(res.data)
+    //   })
+    //   .catch((err) => console.error(err))
   })
 
   return (
@@ -37,17 +38,17 @@ const DetailHistory = () => {
       <CRow>
         <CCol xs>
           <CCard className="mb-4">
-            <CCardHeader>BPR Angga - PPOB</CCardHeader>
+            <CCardHeader>BPR Angga - History</CCardHeader>
             <CCardBody>
               <CTable align="middle" className="mb-0 border" hover responsive>
                 <CTableHead color="light">
                   <CTableRow>
                     <CTableHeaderCell>Date</CTableHeaderCell>
-                    <CTableHeaderCell>Product</CTableHeaderCell>
-                    <CTableHeaderCell>Status</CTableHeaderCell>
-                    <CTableHeaderCell>No Reff</CTableHeaderCell>
-                    <CTableHeaderCell>Amount</CTableHeaderCell>
-                    <CTableHeaderCell>Fee</CTableHeaderCell>
+                    <CTableHeaderCell>Jenis Transaksi</CTableHeaderCell>
+                    <CTableHeaderCell>Keterangan Transaksi</CTableHeaderCell>
+                    <CTableHeaderCell>Data Transaksi</CTableHeaderCell>
+                    <CTableHeaderCell>Debit</CTableHeaderCell>
+                    <CTableHeaderCell>Kredit</CTableHeaderCell>
                   </CTableRow>
                 </CTableHead>
                 <CTableBody>
@@ -57,13 +58,16 @@ const DetailHistory = () => {
                         <div>{item.tgl_trans}</div>
                       </CTableDataCell>
                       <CTableDataCell>
-                        <div>{item.produk_id}</div>
+                        <div>{item.no_hp}</div>
                       </CTableDataCell>
                       <CTableDataCell>
-                        <div>{item.status_rek}</div>
+                        <div>{item.rrn}</div>
                       </CTableDataCell>
                       <CTableDataCell>
-                        <div>{item.reff}</div>
+                        {item.status_rek === '1' ? <div>Approve</div> : <div>Rejected</div>}
+                      </CTableDataCell>
+                      <CTableDataCell>
+                        <div>{item.ket_trans}</div>
                       </CTableDataCell>
                       <CTableDataCell>
                         <div>Rp. {item.amount}</div>
@@ -75,6 +79,9 @@ const DetailHistory = () => {
                   ))}
                 </CTableBody>
               </CTable>
+              <CButton color="success" className="me-2 my-3">
+                Download Excel
+              </CButton>
             </CCardBody>
           </CCard>
         </CCol>
@@ -83,4 +90,4 @@ const DetailHistory = () => {
   )
 }
 
-export default DetailHistory
+export default DetailPpob

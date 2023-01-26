@@ -19,23 +19,22 @@ import {
 const History = () => {
   const [bprChoice, setBprChoice] = useState('')
   const [transChoice, setTransChoice] = useState('')
+  const [detail, setDetail] = useState('')
 
   const navigate = useNavigate()
 
   const handleSubmit = (e) => {
     e.preventDefault()
     if (bprChoice !== '' && transChoice !== '') {
-      navigate('/history/detail', { state: { bprChoice, transChoice } })
+      navigate(`/history/detail/${bprChoice}/${transChoice}`, { state: { bprChoice, transChoice } })
     }
   }
 
   const handleChange1 = (e) => {
-    console.log(e.target.value)
     setBprChoice(e.target.value)
   }
 
   const handleChange2 = (e) => {
-    console.log(e.target.value)
     setTransChoice(e.target.value)
   }
 
@@ -53,17 +52,19 @@ const History = () => {
                 <CFormSelect id="inputState" onChange={handleChange1}>
                   <option value="">-</option>
                   <option value="2640">BPR Angga</option>
-                  <option value="0931">BPR Garut</option>
+                  {/* <option value="0931">BPR Indra</option> */}
                   {/* <option>BPR Garut</option> */}
                 </CFormSelect>
               </CCol>
               <CCol xs={12}>
-                <CFormLabel htmlFor="inputState">Jenis Transaksi</CFormLabel>
+                <CFormLabel htmlFor="inputState">Rekening</CFormLabel>
                 <CFormSelect id="inputState" onChange={handleChange2}>
                   <option value="">-</option>
-                  <option value="1%">Tarik Tunai</option>
-                  <option value="5%">PPOB</option>
-                  <option value="2%">Transfer</option>
+                  <option value="100204">100204</option>
+                  <option value="100205">100205</option>
+                  <option value="100206">100206</option>
+                  <option value="100207">100207</option>
+                  <option value="100208">100208</option>
                 </CFormSelect>
               </CCol>
               <hr></hr>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useParams } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import {
@@ -25,11 +25,12 @@ const Dashboard = () => {
   const navigate = useNavigate()
   const [bpr, setBpr] = useState([])
   // const url = 'https://gw-dev-api.medtransdigital.com/dashboard/list_bpr'
-  // useFetch({ url, onSuccess: (data) => setBpr(data.data) })
+  // useFetch({ url, onSuccess: (data) => setBpr(data.data) }))
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    navigate('/dashboard/detail', { state: {} })
+    const bpr_id = e.target.id
+    navigate(`/dashboard/detail/${bpr_id}`, { state: {} })
   }
 
   useEffect(() => {
@@ -69,8 +70,13 @@ const Dashboard = () => {
                         <div>{moment().format('HH:mm:ss | MMMM Do YYYY')}</div>
                       </CTableDataCell>
                       <CTableDataCell>
-                        {item.bpr_id === '1001' ? (
-                          <CButton color="primary" className="me-2" onClick={handleSubmit}>
+                        {item.bpr_id === '1001' || item.bpr_id === '0998' ? (
+                          <CButton
+                            id={item.bpr_id}
+                            color="primary"
+                            className="me-2"
+                            onClick={handleSubmit}
+                          >
                             Detail
                           </CButton>
                         ) : (

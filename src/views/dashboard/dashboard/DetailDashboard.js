@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { useParams } from 'react-router-dom'
 
 import {
   CCard,
@@ -18,11 +19,13 @@ import {
 const DetailDashboard = () => {
   const [rek, setRek] = useState([])
   const [total, setTotal] = useState(0)
+  const [id, setId] = useState(0)
+  let { bpr_id } = useParams()
   // const url = 'https://gw-dev-api.medtransdigital.com/dashboard/get_rek?bpr_id=1001'
   // // useFetch({ url, onSuccess: (data) => setRek(data.data) })
 
   useEffect(() => {
-    fetch('https://gw-dev-api.medtransdigital.com/dashboard/get_gl?bpr_id=1001')
+    fetch(`https://gw-dev-api.medtransdigital.com/dashboard/get_gl?bpr_id=${bpr_id}`)
       .then((res) => res.json())
       .then((res) => {
         let totalAmount = 0
@@ -64,9 +67,9 @@ const DetailDashboard = () => {
               <CTable align="middle" className="mb-0 border" hover responsive>
                 <CTableHead color="light">
                   <CTableRow>
-                    <CTableHeaderCell>Nama Rekening</CTableHeaderCell>
-                    <CTableHeaderCell>Nomer Rekening</CTableHeaderCell>
-                    <CTableHeaderCell>Total Saldo</CTableHeaderCell>
+                    <CTableHeaderCell className="text-center">Nama Rekening</CTableHeaderCell>
+                    <CTableHeaderCell className="text-center">Nomer Rekening</CTableHeaderCell>
+                    <CTableHeaderCell className="text-center">Total Saldo</CTableHeaderCell>
                   </CTableRow>
                 </CTableHead>
                 <CTableBody>
@@ -79,7 +82,9 @@ const DetailDashboard = () => {
                         <div>{item.nosbb}</div>
                       </CTableDataCell>
                       <CTableDataCell>
-                        <div>Rp. {formatRibuan(parseInt(item.saldo_akhir))}</div>
+                        <div className="text-right">
+                          Rp. {formatRibuan(parseInt(item.saldo_akhir))}
+                        </div>
                       </CTableDataCell>
                     </CTableRow>
                   ))}
@@ -87,8 +92,8 @@ const DetailDashboard = () => {
                     <CTableDataCell colSpan={2}>
                       <div>Total Saldo</div>
                     </CTableDataCell>
-                    <CTableDataCell>
-                      <div>Rp. {formatRibuan(total)}</div>
+                    <CTableDataCell className="text-right">
+                      <div className="text-right">Rp. {formatRibuan(total)}</div>
                     </CTableDataCell>
                   </CTableRow>
                 </CTableBody>
