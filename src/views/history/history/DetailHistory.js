@@ -49,6 +49,7 @@ const DetailPpob = () => {
                     <CTableHeaderCell>Data Transaksi</CTableHeaderCell>
                     <CTableHeaderCell>Debit</CTableHeaderCell>
                     <CTableHeaderCell>Kredit</CTableHeaderCell>
+                    <CTableHeaderCell>RRN</CTableHeaderCell>
                   </CTableRow>
                 </CTableHead>
                 <CTableBody>
