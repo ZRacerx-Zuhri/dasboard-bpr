@@ -18,6 +18,8 @@ import {
 import CIcon from '@coreui/icons-react'
 import { cilLoopCircular } from '@coreui/icons'
 // import { useFetch } from '../../action'
+const moment = require('moment')
+moment.locale('id')
 
 const Dashboard = () => {
   const navigate = useNavigate()
@@ -50,7 +52,7 @@ const Dashboard = () => {
                   <CTableRow>
                     <CTableHeaderCell>Nama BPR</CTableHeaderCell>
                     <CTableHeaderCell>Kode BPR</CTableHeaderCell>
-                    <CTableHeaderCell>Total Saldo</CTableHeaderCell>
+                    <CTableHeaderCell>Last Update</CTableHeaderCell>
                     <CTableHeaderCell>Action</CTableHeaderCell>
                   </CTableRow>
                 </CTableHead>
@@ -64,7 +66,7 @@ const Dashboard = () => {
                         <div>{item.bpr_id}</div>
                       </CTableDataCell>
                       <CTableDataCell>
-                        <div>Rp. {item.saldo}</div>
+                        <div>{moment().format('HH:mm:ss | MMMM Do YYYY')}</div>
                       </CTableDataCell>
                       <CTableDataCell>
                         {item.bpr_id === '1001' ? (
