@@ -107,7 +107,7 @@ const DetailPpob = () => {
     //     setTrans(res.data)
     //   })
     //   .catch((err) => console.error(err))
-  },[])
+  }, [])
 
   return (
     <>
