@@ -20,8 +20,6 @@ const DetailDashboard = () => {
   const [rek, setRek] = useState([])
   const [total, setTotal] = useState(0)
   let { bpr_id } = useParams()
-  // const url = 'https://gw-dev-api.medtransdigital.com/dashboard/get_rek?bpr_id=1001'
-  // // useFetch({ url, onSuccess: (data) => setRek(data.data) })
 
   useEffect(() => {
     fetch(`https://gw-dev-api.medtransdigital.com/dashboard/get_gl?bpr_id=${bpr_id}`)
@@ -35,7 +33,7 @@ const DetailDashboard = () => {
         setTotal(totalAmount)
       })
       .catch((err) => console.error(err))
-  })
+  },[])
 
   const formatRibuan = (angka) => {
     var number_string = angka.toString().replace(/[^,\d]/g, ''),
