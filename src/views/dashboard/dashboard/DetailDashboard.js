@@ -33,7 +33,7 @@ const DetailDashboard = () => {
         setTotal(totalAmount)
       })
       .catch((err) => console.error(err))
-  }, [bpr_id])
+  }, [])
 
   const formatRibuan = (angka) => {
     var number_string = angka.toString().replace(/[^,\d]/g, ''),
