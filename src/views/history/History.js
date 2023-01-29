@@ -19,13 +19,16 @@ import {
 const History = () => {
   const [bprChoice, setBprChoice] = useState('')
   const [transChoice, setTransChoice] = useState('')
+  const [statusChoice, setStatusChoice] = useState('')
 
   const navigate = useNavigate()
 
   const handleSubmit = (e) => {
     e.preventDefault()
     if (bprChoice !== '' && transChoice !== '') {
-      navigate(`/history/detail/${bprChoice}/${transChoice}`, { state: { bprChoice, transChoice } })
+      navigate(`/history/detail/${bprChoice}/${transChoice}/${statusChoice}`, {
+        state: { bprChoice, transChoice, statusChoice },
+      })
     }
   }
 
@@ -35,6 +38,10 @@ const History = () => {
 
   const handleChange2 = (e) => {
     setTransChoice(e.target.value)
+  }
+
+  const handleChange3 = (e) => {
+    setStatusChoice(e.target.value)
   }
 
   return (
@@ -50,8 +57,8 @@ const History = () => {
                 <CFormLabel htmlFor="inputState">Pilih BPR</CFormLabel>
                 <CFormSelect id="inputState" onChange={handleChange1}>
                   <option value="">-</option>
-                  <option value="2640">BPR Angga</option>
-                  {/* <option value="0931">BPR Indra</option> */}
+                  <option value="1001">BPR Angga</option>
+                  <option value="0998">BPR Indra Chandra</option>
                   {/* <option>BPR Garut</option> */}
                 </CFormSelect>
               </CCol>
@@ -59,11 +66,25 @@ const History = () => {
                 <CFormLabel htmlFor="inputState">Rekening</CFormLabel>
                 <CFormSelect id="inputState" onChange={handleChange2}>
                   <option value="">-</option>
-                  <option value="100204">100204</option>
-                  <option value="100205">100205</option>
-                  <option value="100206">100206</option>
-                  <option value="100207">100207</option>
-                  <option value="100208">100208</option>
+                  <option value="100204">100204 PENAMPUNGAN TUNAI</option>
+                  <option value="100205">100205 PENAMPUNGAN FEE TUNAI</option>
+                  <option value="101206">100206 REK OY ATM</option>
+                  <option value="101207">100207 REK OY FEE TUNAI</option>
+                  <option value="101208">100208 TAGIHAN TUNAI ANTAR BANK</option>
+                  <option value="101209">100209 KEWAJIBAN TUNAI ANTAR BANK</option>
+                  <option value="210201">210201 PENAMPUNG OY TRANSFER</option>
+                  <option value="210202">210202 PENAMPUNG OY FEE TRANSFER</option>
+                  <option value="210203">210203 TAGIHAN OY TRF CR</option>
+                  <option value="500201">500201 PENAMPUNG OY PPOB</option>
+                  <option value="500202">500202 PENAMPUNG OY PPOB FEE</option>
+                </CFormSelect>
+              </CCol>
+              <CCol xs={12}>
+                <CFormLabel htmlFor="inputState">Status</CFormLabel>
+                <CFormSelect id="inputState" onChange={handleChange3}>
+                  <option value="">-</option>
+                  <option value="1">Approved</option>
+                  <option value="R">Reversed</option>
                 </CFormSelect>
               </CCol>
               <hr></hr>

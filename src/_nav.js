@@ -9,8 +9,8 @@ import {
   // cilNotes,
   // cilDrop,
   // cilPencil,
-  // cilPuzzle,
   // cilStar,
+  cilPuzzle,
   cilSpeedometer,
   cilHistory,
 } from '@coreui/icons'
@@ -32,6 +32,12 @@ const _nav = [
     name: 'Transaction History',
     to: '/history',
     icon: <CIcon icon={cilHistory} customClassName="nav-icon" />,
+  },
+  {
+    component: CNavItem,
+    name: 'Konsolidasi',
+    to: '/konsolidasi',
+    icon: <CIcon icon={cilPuzzle} customClassName="nav-icon" />,
   },
   // {
   //   component: CNavTitle,

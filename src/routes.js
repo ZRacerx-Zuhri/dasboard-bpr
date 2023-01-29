@@ -11,7 +11,11 @@ const routes = [
   { path: '/dashboard', name: 'Home', element: Dashboard },
   { path: '/dashboard/detail/:bpr_id', name: 'Detail Dashboard', element: DetailDashboard },
   { path: '/history', name: 'History', element: History },
-  { path: '/history/detail/:bpr_id/:no_rek', name: 'Detail History', element: DetailHistory },
+  {
+    path: '/history/detail/:bpr_id/:no_rek/:status',
+    name: 'Detail History',
+    element: DetailHistory,
+  },
 ]
 
 export default routes
