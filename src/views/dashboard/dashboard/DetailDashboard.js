@@ -19,6 +19,7 @@ import {
 const DetailDashboard = () => {
   const [rek, setRek] = useState([])
   const [total, setTotal] = useState(0)
+  const [bpr, setBpr] = useState('')
   let { bpr_id } = useParams()
 
   useEffect(() => {
@@ -31,6 +32,7 @@ const DetailDashboard = () => {
         }
         setRek(res.data)
         setTotal(totalAmount)
+        setBpr(res.nama)
       })
       .catch((err) => console.error(err))
   }, [])
@@ -58,7 +60,7 @@ const DetailDashboard = () => {
         <CCol xs>
           <CCard className="mb-4">
             <CCardHeader>
-              <strong>BPR Angga</strong>
+              <strong>{bpr}</strong>
             </CCardHeader>
             <CCardBody>
               <CTable align="middle" className="mb-0 border" hover responsive>
