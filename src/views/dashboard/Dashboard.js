@@ -70,18 +70,14 @@ const Dashboard = () => {
                         <div>{moment().format('HH:mm:ss | MMMM Do YYYY')}</div>
                       </CTableDataCell>
                       <CTableDataCell>
-                        {item.bpr_id === '1001' || item.bpr_id === '0998' ? (
-                          <CButton
-                            id={item.bpr_id}
-                            color="primary"
-                            className="me-2"
-                            onClick={handleSubmit}
-                          >
-                            Detail
-                          </CButton>
-                        ) : (
-                          <div></div>
-                        )}
+                        <CButton
+                          id={item.bpr_id}
+                          color="primary"
+                          className="me-2"
+                          onClick={handleSubmit}
+                        >
+                          Detail
+                        </CButton>
                         <CButton component="a" color="primary" role="button">
                           <CIcon icon={cilLoopCircular} className="me-1" />
                           Update
