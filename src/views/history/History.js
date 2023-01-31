@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import {
   CButton,
@@ -20,8 +20,18 @@ const History = () => {
   const [bprChoice, setBprChoice] = useState('')
   const [transChoice, setTransChoice] = useState('')
   const [statusChoice, setStatusChoice] = useState('')
+  const [bpr, setBpr] = useState([])
 
   const navigate = useNavigate()
+
+  useEffect(() => {
+    fetch('https://gw-dev-api.medtransdigital.com/dashboard/list_bpr')
+      .then((res) => res.json())
+      .then((res) => {
+        setBpr(res.data)
+      })
+      .catch((err) => console.error(err))
+  }, [])
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -57,9 +67,11 @@ const History = () => {
                 <CFormLabel htmlFor="inputState">Pilih BPR</CFormLabel>
                 <CFormSelect id="inputState" onChange={handleChange1}>
                   <option value="">-</option>
-                  <option value="1001">BPR Angga</option>
-                  <option value="0998">BPR Indra Chandra</option>
-                  {/* <option>BPR Garut</option> */}
+                  {bpr.map((item, index) => (
+                    <option value={item.bpr_id} key={index}>
+                      {item.bpr_id} - {item.nama_bpr}
+                    </option>
+                  ))}
                 </CFormSelect>
               </CCol>
               <CCol xs={12}>
