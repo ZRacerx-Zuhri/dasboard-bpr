@@ -21,81 +21,6 @@ const DetailHistory = () => {
   let location = useLocation()
   const [trans, setTrans] = useState([])
   const [bpr, setBpr] = useState([])
-  // const url = `https://gw-dev-api.medtransdigital.com/dashboard/get_trans?bpr_id=2640&tcode=${location.state.userChoice}`
-  // useFetch({ url, onSuccess: (data) => setTrans(data.data) })
-
-  // const data = [
-  //   {
-  //     date: '08:56:50 | January 27th 2023',
-  //     jenis_transaksi: 'Transfer',
-  //     keterangan_transaksi: 'Transfer ke BPR Indra',
-  //     data_transaksi: 'John Doe 1234567890',
-  //     status: '1',
-  //     debit: 50000,
-  //     kredit: 0,
-  //     rrn: '000035',
-  //   },
-  //   {
-  //     date: '08:56:50 | January 27th 2023',
-  //     jenis_transaksi: 'Transfer',
-  //     keterangan_transaksi: 'Transfer dari BPR Tegal',
-  //     data_transaksi: 'John Pantau 1001002003004',
-  //     status: '1',
-  //     debit: 0,
-  //     kredit: 100000,
-  //     rrn: '000028',
-  //   },
-  //   {
-  //     date: '08:56:50 | January 27th 2023',
-  //     jenis_transaksi: 'Bayar/Top-Up',
-  //     keterangan_transaksi: 'Pembayaran Telkomsel Prepaid',
-  //     data_transaksi: '081234567890',
-  //     status: '1',
-  //     debit: 72500,
-  //     kredit: 0,
-  //     rrn: '000002',
-  //   },
-  //   {
-  //     date: '08:56:50 | January 27th 2023',
-  //     jenis_transaksi: 'Biaya',
-  //     keterangan_transaksi: 'Pembayaran Telkomsel Prepaid',
-  //     data_transaksi: '081234567890',
-  //     status: '1',
-  //     debit: 1500,
-  //     kredit: 0,
-  //     rrn: '000002',
-  //   },
-  //   {
-  //     date: '08:56:50 | January 26th 2023',
-  //     jenis_transaksi: 'Transfer',
-  //     keterangan_transaksi: 'Transfeer ke BPR Indra',
-  //     data_transaksi: 'John Doe 1234567890',
-  //     status: '1',
-  //     debit: 50000,
-  //     kredit: 0,
-  //     rrn: '000001',
-  //   },
-  //   {
-  //     date: '08:56:50 | January 27th 2023',
-  //     jenis_transaksi: 'Tarik Tunai',
-  //     keterangan_transaksi: 'Penarikan tunai di ATM Pusat',
-  //     data_transaksi: 'S1GPMK10RA',
-  //     status: '1',
-  //     debit: 300000,
-  //     kredit: 0,
-  //     rrn: '000013',
-  //   },
-  //   {
-  //     date: '08:56:50 | January 27th 2023',
-  //     jenis_transaksi: 'Transfer',
-  //     keterangan_transaksi: 'Transfeer dari Bank Mandiri',
-  //     data_transaksi: 'John Doe 12700012312345',
-  //     status: '0',
-  //     debit: 0,
-  //     kredit: 150000,
-  //     rrn: '000001',
-  //   },
-  // ]
 
   useEffect(() => {
     fetch(
@@ -104,7 +29,9 @@ const DetailHistory = () => {
       .then((res) => res.json())
       .then((res) => {
         console.log(res.data)
-        if (!res.data.length) setTrans(res.data)
+        if (res.data.length) {
+          setTrans(res.data)
+        }
         setBpr(res.bpr)
       })
       .catch((err) => console.error(err))
