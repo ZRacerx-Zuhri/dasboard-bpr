@@ -20,6 +20,7 @@ import {
 const DetailHistory = () => {
   let location = useLocation()
   const [trans, setTrans] = useState([])
+  const [bpr, setBpr] = useState([])
   // const url = `https://gw-dev-api.medtransdigital.com/dashboard/get_trans?bpr_id=2640&tcode=${location.state.userChoice}`
   // useFetch({ url, onSuccess: (data) => setTrans(data.data) })
 
@@ -103,7 +104,8 @@ const DetailHistory = () => {
       .then((res) => res.json())
       .then((res) => {
         console.log(res.data)
-        setTrans(res.data)
+        if (!res.data.length) setTrans(res.data)
+        setBpr(res.bpr)
       })
       .catch((err) => console.error(err))
   }, [])
@@ -113,7 +115,7 @@ const DetailHistory = () => {
       <CRow>
         <CCol xs>
           <CCard className="mb-4">
-            <CCardHeader>BPR Angga - History</CCardHeader>
+            <CCardHeader>{bpr} - History</CCardHeader>
             <CCardBody>
               <CTable align="middle" className="mb-0 border" hover responsive>
                 <CTableHead color="light">
