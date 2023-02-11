@@ -42,7 +42,9 @@ const DetailHistory = () => {
       <CRow>
         <CCol xs>
           <CCard className="mb-4">
-            <CCardHeader>{bpr} - History</CCardHeader>
+            <CCardHeader>
+              {bpr} - {location.state.transChoice}
+            </CCardHeader>
             <CCardBody>
               <CTable align="middle" className="mb-0 border" hover responsive>
                 <CTableHead color="light">

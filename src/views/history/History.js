@@ -86,7 +86,7 @@ const History = () => {
                   <option value="101209">100209 KEWAJIBAN TUNAI ANTAR BANK</option>
                   <option value="210201">210201 PENAMPUNG OY TRANSFER</option>
                   <option value="210202">210202 PENAMPUNG OY FEE TRANSFER</option>
-                  <option value="210203">210203 TAGIHAN OY TRF CR</option>
+                  <option value="220203">210203 TAGIHAN OY TRF CR</option>
                   <option value="500201">500201 PENAMPUNG OY PPOB</option>
                   <option value="500202">500202 PENAMPUNG OY PPOB FEE</option>
                 </CFormSelect>
