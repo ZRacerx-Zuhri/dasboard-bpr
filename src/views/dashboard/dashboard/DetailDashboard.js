@@ -75,14 +75,14 @@ const DetailDashboard = () => {
                   {rek.map((item, index) => (
                     <CTableRow v-for="item in tableItems" key={index}>
                       <CTableDataCell>
-                        <div>{item.nmsbb}</div>
+                        <div>{item.nama_rek}</div>
                       </CTableDataCell>
                       <CTableDataCell>
-                        <div>{item.nosbb}</div>
+                        <div>{item.no_rek}</div>
                       </CTableDataCell>
                       <CTableDataCell>
                         <div className="text-right">
-                          Rp. {formatRibuan(parseInt(item.saldo_akhir))}
+                          Rp. {formatRibuan(parseInt(item.saldoakhir))}
                         </div>
                       </CTableDataCell>
                     </CTableRow>
