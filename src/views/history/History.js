@@ -78,6 +78,7 @@ const History = () => {
                 <CFormLabel htmlFor="inputState">Rekening</CFormLabel>
                 <CFormSelect id="inputState" onChange={handleChange2}>
                   <option value="">-</option>
+                  <option value="all">All</option>
                   <option value="100204">100204 PENAMPUNGAN TUNAI</option>
                   <option value="100205">100205 PENAMPUNGAN FEE TUNAI</option>
                   <option value="101206">100206 REK OY ATM</option>
@@ -95,6 +96,7 @@ const History = () => {
                 <CFormLabel htmlFor="inputState">Status</CFormLabel>
                 <CFormSelect id="inputState" onChange={handleChange3}>
                   <option value="">-</option>
+                  <option value="all">All</option>
                   <option value="1">Approved</option>
                   <option value="R">Reversed</option>
                 </CFormSelect>

@@ -21,6 +21,8 @@ const DetailHistory = () => {
   let location = useLocation()
   const [trans, setTrans] = useState([])
   const [bpr, setBpr] = useState([])
+  const [rek, setRek] = useState([])
+  const [status, setStatus] = useState('')
 
   useEffect(() => {
     fetch(
@@ -32,7 +34,15 @@ const DetailHistory = () => {
         if (res.data.length) {
           setTrans(res.data)
         }
+        if (location.state.statusChoice === 'all') {
+          setStatus('All')
+        } else if (location.state.statusChoice === '1') {
+          setStatus('Approved')
+        } else if (location.state.statusChoice === 'R') {
+          setStatus('Reversed')
+        }
         setBpr(res.bpr)
+        setRek(res.rek)
       })
       .catch((err) => console.error(err))
   }, [])
@@ -43,7 +53,7 @@ const DetailHistory = () => {
         <CCol xs>
           <CCard className="mb-4">
             <CCardHeader>
-              {bpr} - {location.state.transChoice}
+              {bpr} - {rek} - {status}
             </CCardHeader>
             <CCardBody>
               <CTable align="middle" className="mb-0 border" hover responsive>
