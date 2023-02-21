@@ -26,7 +26,7 @@ const DetailHistory = () => {
 
   useEffect(() => {
     fetch(
-      `https://gw-dev-api.medtransdigital.com/dashboard/get_trans?bpr_id=${location.state.bprChoice}&nosbb=${location.state.transChoice}&status=${location.state.statusChoice}`,
+      `https://gw-dev-api.medtransdigital.com/dashboard/get_trans?bpr_id=${location.state.bprChoice}&nosbb=${location.state.transChoice}&status=${location.state.statusChoice}&fr=${location.state.fr}&to=${location.state.to}`,
     )
       .then((res) => res.json())
       .then((res) => {
@@ -47,6 +47,23 @@ const DetailHistory = () => {
       .catch((err) => console.error(err))
   }, [])
 
+  const formatRibuan = (angka) => {
+    var number_string = angka.toString().replace(/[^,\d]/g, ''),
+      split = number_string.split(','),
+      sisa = split[0].length % 3,
+      angka_hasil = split[0].substr(0, sisa),
+      ribuan = split[0].substr(sisa).match(/\d{3}/gi)
+
+    // tambahkan titik jika yang di input sudah menjadi angka ribuan
+    if (ribuan) {
+      let separator = sisa ? '.' : ''
+      angka_hasil += separator + ribuan.join('.')
+    }
+
+    angka_hasil = split[1] !== undefined ? angka_hasil + ',' + split[1] : angka_hasil
+    return angka_hasil
+  }
+
   return (
     <>
       <CRow>
@@ -63,11 +80,12 @@ const DetailHistory = () => {
                     <CTableHeaderCell>Jenis Transaksi</CTableHeaderCell>
                     <CTableHeaderCell>Keterangan Transaksi</CTableHeaderCell>
                     <CTableHeaderCell>Data Transaksi</CTableHeaderCell>
-                    <CTableHeaderCell>Debit</CTableHeaderCell>
-                    <CTableHeaderCell>Kredit</CTableHeaderCell>
+                    <CTableHeaderCell>Debit Rp.</CTableHeaderCell>
+                    <CTableHeaderCell>Kredit Rp.</CTableHeaderCell>
                     <CTableHeaderCell>RRN</CTableHeaderCell>
                     <CTableHeaderCell>Status</CTableHeaderCell>
                     <CTableHeaderCell>Rcode</CTableHeaderCell>
+                    <CTableHeaderCell>No Reff</CTableHeaderCell>
                   </CTableRow>
                 </CTableHead>
                 <CTableBody>
@@ -77,7 +95,9 @@ const DetailHistory = () => {
                         <div>{item.tgl_trans}</div>
                       </CTableDataCell>
                       <CTableDataCell>
-                        {item.trx_code === '1000' || item.trx_code === '1100' ? (
+                        {item.trx_code === '1000' ? (
+                          <div>Token</div>
+                        ) : item.trx_code === '1100' ? (
                           <div>Tarik Tunai</div>
                         ) : item.trx_code === '5000' ? (
                           <div>PPOB</div>
@@ -92,10 +112,10 @@ const DetailHistory = () => {
                         <div>{item.data_trans}</div>
                       </CTableDataCell>
                       <CTableDataCell>
-                        <div>Rp. {item.amount_db}</div>
+                        <div>{formatRibuan(item.amount_db)}</div>
                       </CTableDataCell>
                       <CTableDataCell>
-                        <div>Rp. {item.amount_cr}</div>
+                        <div>{formatRibuan(item.amount_cr)}</div>
                       </CTableDataCell>
                       <CTableDataCell>
                         <div>{item.rrn}</div>
@@ -111,6 +131,9 @@ const DetailHistory = () => {
                       </CTableDataCell>
                       <CTableDataCell>
                         <div>{item.rcode}</div>
+                      </CTableDataCell>
+                      <CTableDataCell>
+                        <div>{item.noreff}</div>
                       </CTableDataCell>
                     </CTableRow>
                   ))}

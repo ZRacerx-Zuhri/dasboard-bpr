@@ -21,6 +21,13 @@ const History = () => {
   const [transChoice, setTransChoice] = useState('')
   const [statusChoice, setStatusChoice] = useState('')
   const [bpr, setBpr] = useState([])
+  const [YFR, setYFR] = useState('')
+  const [MFR, setMFR] = useState('')
+  const [DFR, setDFR] = useState('')
+  const [YTO, setYTO] = useState('')
+  const [MTO, setMTO] = useState('')
+  const [DTO, setDTO] = useState('')
+  const [TO, setTO] = useState(true)
 
   const navigate = useNavigate()
 
@@ -35,9 +42,15 @@ const History = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    if (bprChoice !== '' && transChoice !== '') {
+    if (bprChoice !== '' && transChoice !== '' && statusChoice !== '') {
       navigate(`/history/detail/${bprChoice}/${transChoice}/${statusChoice}`, {
-        state: { bprChoice, transChoice, statusChoice },
+        state: {
+          bprChoice,
+          transChoice,
+          statusChoice,
+          fr: `20${YFR}-${MFR}-${DFR} 00:00:00`,
+          to: `20${YTO}-${MTO}-${DTO} 23:59:59`,
+        },
       })
     }
   }
@@ -52,6 +65,45 @@ const History = () => {
 
   const handleChange3 = (e) => {
     setStatusChoice(e.target.value)
+  }
+
+  const handleChangeMFR = (e) => {
+    setMFR(e.target.value)
+    if (e.target.value !== '' && DFR !== '' && YFR !== '') {
+      setTO(false)
+    } else {
+      setTO(true)
+    }
+  }
+
+  const handleChangeDFR = (e) => {
+    setDFR(e.target.value)
+    if (MFR !== '' && e.target.value !== '' && YFR !== '') {
+      setTO(false)
+    } else {
+      setTO(true)
+    }
+  }
+
+  const handleChangeYFR = (e) => {
+    setYFR(e.target.value)
+    if (MFR !== '' && DFR !== '' && e.target.value !== '') {
+      setTO(false)
+    } else {
+      setTO(true)
+    }
+  }
+
+  const handleChangeMTO = (e) => {
+    setMTO(e.target.value)
+  }
+
+  const handleChangeDTO = (e) => {
+    setDTO(e.target.value)
+  }
+
+  const handleChangeYTO = (e) => {
+    setYTO(e.target.value)
   }
 
   return (
@@ -102,131 +154,131 @@ const History = () => {
                 </CFormSelect>
               </CCol>
               <hr></hr>
-              <strong className="my-0">From</strong>
+              <strong className="my-0">Dari</strong>
               <CCol md={4}>
                 <CFormLabel htmlFor="inputState">Bulan</CFormLabel>
-                <CFormSelect id="inputState">
-                  <option>Januari</option>
-                  <option>Februari</option>
-                  <option>Maret</option>
-                  <option>April</option>
-                  <option>Mei</option>
-                  <option>Juni</option>
-                  <option>Juli</option>
-                  <option>Agustus</option>
-                  <option>September</option>
-                  <option>Oktober</option>
-                  <option>November</option>
-                  <option>Desember</option>
+                <CFormSelect id="inputState" onChange={handleChangeMFR}>
+                  <option value="">-</option>
+                  {/* <option value="01">Januari</option> */}
+                  <option value="02">Februari</option>
+                  {/* <option value="03">Maret</option>
+                  <option value="04">April</option>
+                  <option value="05">Mei</option>
+                  <option value="06">Juni</option>
+                  <option value="07">Juli</option>
+                  <option value="08">Agustus</option>
+                  <option value="09">September</option>
+                  <option value="10">Oktober</option>
+                  <option value="11">November</option>
+                  <option value="12">Desember</option> */}
                 </CFormSelect>
               </CCol>
               <CCol md={4}>
                 <CFormLabel htmlFor="inputState">Tanggal</CFormLabel>
-                <CFormSelect id="inputState">
-                  <option>1</option>
-                  <option>2</option>
-                  <option>3</option>
-                  <option>4</option>
-                  <option>5</option>
-                  <option>6</option>
-                  <option>7</option>
-                  <option>8</option>
-                  <option>9</option>
-                  <option>10</option>
-                  <option>11</option>
-                  <option>12</option>
-                  <option>13</option>
-                  <option>14</option>
-                  <option>15</option>
-                  <option>16</option>
-                  <option>17</option>
-                  <option>18</option>
-                  <option>19</option>
-                  <option>20</option>
-                  <option>21</option>
-                  <option>22</option>
-                  <option>23</option>
-                  <option>24</option>
-                  <option>25</option>
-                  <option>26</option>
-                  <option>27</option>
-                  <option>28</option>
-                  <option>29</option>
-                  <option>30</option>
-                  <option>31</option>
+                <CFormSelect id="inputState" onChange={handleChangeDFR}>
+                  <option value="">-</option>
+                  {/* <option value="01">1</option>
+                  <option value="02">2</option>
+                  <option value="03">3</option>
+                  <option value="04">4</option>
+                  <option value="05">5</option>
+                  <option value="06">6</option>
+                  <option value="07">7</option>
+                  <option value="08">8</option>
+                  <option value="09">9</option>
+                  <option value="10">10</option>
+                  <option value="11">11</option>
+                  <option value="12">12</option>
+                  <option value="13">13</option>
+                  <option value="14">14</option>
+                  <option value="15">15</option>
+                  <option value="16">16</option>
+                  <option value="17">17</option> */}
+                  <option value="18">18</option>
+                  <option value="19">19</option>
+                  <option value="20">20</option>
+                  <option value="21">21</option>
+                  <option value="22">22</option>
+                  <option value="23">23</option>
+                  <option value="24">24</option>
+                  <option value="25">25</option>
+                  <option value="26">26</option>
+                  <option value="27">27</option>
+                  <option value="28">28</option>
+                  {/* <option value="29">29</option>
+                  <option value="30">30</option>
+                  <option value="31">31</option> */}
                 </CFormSelect>
               </CCol>
               <CCol md={4}>
                 <CFormLabel htmlFor="inputState">Tahun</CFormLabel>
-                <CFormSelect id="inputState">
-                  <option>2020</option>
-                  <option>2021</option>
-                  <option>2022</option>
-                  <option>2023</option>
+                <CFormSelect id="inputState" onChange={handleChangeYFR}>
+                  <option value="">-</option>
+                  <option value="23">2023</option>
                 </CFormSelect>
               </CCol>
               <hr></hr>
-              <strong className="my-0">To</strong>
+              <strong className="my-0">Sampai</strong>
               <CCol md={4}>
                 <CFormLabel htmlFor="inputState">Bulan</CFormLabel>
-                <CFormSelect id="inputState">
-                  <option>Januari</option>
-                  <option>Februari</option>
-                  <option>Maret</option>
-                  <option>April</option>
-                  <option>Mei</option>
-                  <option>Juni</option>
-                  <option>Juli</option>
-                  <option>Agustus</option>
-                  <option>September</option>
-                  <option>Oktober</option>
-                  <option>November</option>
-                  <option>Desember</option>
+                <CFormSelect id="inputState" disabled={TO} onChange={handleChangeMTO}>
+                  <option value="">-</option>
+                  {/* <option value="01">Januari</option> */}
+                  <option value="02">Februari</option>
+                  {/* <option value="03">Maret</option>
+                  <option value="04">April</option>
+                  <option value="05">Mei</option>
+                  <option value="06">Juni</option>
+                  <option value="07">Juli</option>
+                  <option value="08">Agustus</option>
+                  <option value="09">September</option>
+                  <option value="10">Oktober</option>
+                  <option value="11">November</option>
+                  <option value="12">Desember</option> */}
                 </CFormSelect>
               </CCol>
               <CCol md={4}>
                 <CFormLabel htmlFor="inputState">Tanggal</CFormLabel>
-                <CFormSelect id="inputState">
-                  <option>1</option>
-                  <option>2</option>
-                  <option>3</option>
-                  <option>4</option>
-                  <option>5</option>
-                  <option>6</option>
-                  <option>7</option>
-                  <option>8</option>
-                  <option>9</option>
-                  <option>10</option>
-                  <option>11</option>
-                  <option>12</option>
-                  <option>13</option>
-                  <option>14</option>
-                  <option>15</option>
-                  <option>16</option>
-                  <option>17</option>
-                  <option>18</option>
-                  <option>19</option>
-                  <option>20</option>
-                  <option>21</option>
-                  <option>22</option>
-                  <option>23</option>
-                  <option>24</option>
-                  <option>25</option>
-                  <option>26</option>
-                  <option>27</option>
-                  <option>28</option>
-                  <option>29</option>
-                  <option>30</option>
-                  <option>31</option>
+                <CFormSelect id="inputState" disabled={TO} onChange={handleChangeDTO}>
+                  <option value="">-</option>
+                  {/* <option value="01">1</option>
+                  <option value="02">2</option>
+                  <option value="03">3</option>
+                  <option value="04">4</option>
+                  <option value="05">5</option>
+                  <option value="06">6</option>
+                  <option value="07">7</option>
+                  <option value="08">8</option>
+                  <option value="09">9</option>
+                  <option value="10">10</option>
+                  <option value="11">11</option>
+                  <option value="12">12</option>
+                  <option value="13">13</option>
+                  <option value="14">14</option>
+                  <option value="15">15</option>
+                  <option value="16">16</option>
+                  <option value="17">17</option> */}
+                  <option value="18">18</option>
+                  <option value="19">19</option>
+                  <option value="20">20</option>
+                  <option value="21">21</option>
+                  <option value="22">22</option>
+                  <option value="23">23</option>
+                  <option value="24">24</option>
+                  <option value="25">25</option>
+                  <option value="26">26</option>
+                  <option value="27">27</option>
+                  <option value="28">28</option>
+                  {/* <option value="29">29</option>
+                  <option value="30">30</option>
+                  <option value="31">31</option> */}
                 </CFormSelect>
               </CCol>
               <CCol md={4}>
                 <CFormLabel htmlFor="inputState">Tahun</CFormLabel>
-                <CFormSelect id="inputState">
-                  <option>2020</option>
-                  <option>2021</option>
-                  <option>2022</option>
-                  <option>2023</option>
+                <CFormSelect id="inputState" disabled={TO} onChange={handleChangeYTO}>
+                  <option value="">-</option>
+                  <option value="23">2023</option>
                 </CFormSelect>
               </CCol>
               <CButton type="submit" className="mt-4" onClick={handleSubmit}>
