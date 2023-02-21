@@ -28,7 +28,7 @@ const DetailDashboard = () => {
       .then((res) => {
         let totalAmount = 0
         for (let i = 0; i < res.data.length; i++) {
-          totalAmount = totalAmount + parseInt(res.data[i].saldo_akhir)
+          totalAmount = totalAmount + parseInt(res.data[i].saldoakhir)
         }
         setRek(res.data)
         setTotal(totalAmount)
@@ -80,10 +80,8 @@ const DetailDashboard = () => {
                       <CTableDataCell>
                         <div>{item.no_rek}</div>
                       </CTableDataCell>
-                      <CTableDataCell>
-                        <div className="text-right">
-                          Rp. {formatRibuan(parseInt(item.saldoakhir))}
-                        </div>
+                      <CTableDataCell style={{ textAlign: 'right' }}>
+                        <div>Rp. {formatRibuan(parseInt(item.saldoakhir))}</div>
                       </CTableDataCell>
                     </CTableRow>
                   ))}
@@ -91,8 +89,8 @@ const DetailDashboard = () => {
                     <CTableDataCell colSpan={2}>
                       <div>Total Saldo</div>
                     </CTableDataCell>
-                    <CTableDataCell className="text-right">
-                      <div className="text-right">Rp. {formatRibuan(total)}</div>
+                    <CTableDataCell style={{ textAlign: 'right' }}>
+                      <div>Rp. {formatRibuan(total)}</div>
                     </CTableDataCell>
                   </CTableRow>
                 </CTableBody>

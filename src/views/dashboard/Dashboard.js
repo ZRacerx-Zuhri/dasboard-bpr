@@ -53,7 +53,7 @@ const Dashboard = () => {
                   <CTableRow>
                     <CTableHeaderCell>Nama BPR</CTableHeaderCell>
                     <CTableHeaderCell>Kode BPR</CTableHeaderCell>
-                    <CTableHeaderCell>Last Update</CTableHeaderCell>
+                    {/* <CTableHeaderCell>Last Update</CTableHeaderCell> */}
                     <CTableHeaderCell>Action</CTableHeaderCell>
                   </CTableRow>
                 </CTableHead>
@@ -66,9 +66,9 @@ const Dashboard = () => {
                       <CTableDataCell>
                         <div>{item.bpr_id}</div>
                       </CTableDataCell>
-                      <CTableDataCell>
+                      {/* <CTableDataCell>
                         <div>{moment().format('HH:mm:ss | MMMM Do YYYY')}</div>
-                      </CTableDataCell>
+                      </CTableDataCell> */}
                       <CTableDataCell>
                         <CButton
                           id={item.bpr_id}
@@ -77,10 +77,6 @@ const Dashboard = () => {
                           onClick={handleSubmit}
                         >
                           Detail
-                        </CButton>
-                        <CButton component="a" color="primary" role="button">
-                          <CIcon icon={cilLoopCircular} className="me-1" />
-                          Update
                         </CButton>
                       </CTableDataCell>
                     </CTableRow>

@@ -111,10 +111,10 @@ const DetailHistory = () => {
                       <CTableDataCell>
                         <div>{item.data_trans}</div>
                       </CTableDataCell>
-                      <CTableDataCell>
+                      <CTableDataCell style={{ textAlign: 'right' }}>
                         <div>{formatRibuan(item.amount_db)}</div>
                       </CTableDataCell>
-                      <CTableDataCell>
+                      <CTableDataCell style={{ textAlign: 'right' }}>
                         <div>{formatRibuan(item.amount_cr)}</div>
                       </CTableDataCell>
                       <CTableDataCell>
