@@ -35,7 +35,7 @@ const DetailDashboard = () => {
         setBpr(res.nama)
       })
       .catch((err) => console.error(err))
-  }, [])
+  }, [bpr_id])
 
   const formatRibuan = (angka) => {
     var number_string = angka.toString().replace(/[^,\d]/g, ''),
@@ -66,9 +66,9 @@ const DetailDashboard = () => {
               <CTable align="middle" className="mb-0 border" hover responsive>
                 <CTableHead color="light">
                   <CTableRow>
-                    <CTableHeaderCell className="text-center">Nama Rekening</CTableHeaderCell>
-                    <CTableHeaderCell className="text-center">Nomer Rekening</CTableHeaderCell>
-                    <CTableHeaderCell className="text-center">Total Saldo</CTableHeaderCell>
+                    <CTableHeaderCell>Nama Rekening</CTableHeaderCell>
+                    <CTableHeaderCell>Nomer Rekening</CTableHeaderCell>
+                    <CTableHeaderCell style={{ textAlign: 'right' }}>Saldo Rp.</CTableHeaderCell>
                   </CTableRow>
                 </CTableHead>
                 <CTableBody>
@@ -81,7 +81,7 @@ const DetailDashboard = () => {
                         <div>{item.no_rek}</div>
                       </CTableDataCell>
                       <CTableDataCell style={{ textAlign: 'right' }}>
-                        <div>Rp. {formatRibuan(parseInt(item.saldoakhir))}</div>
+                        <div>{formatRibuan(parseInt(item.saldoakhir))}</div>
                       </CTableDataCell>
                     </CTableRow>
                   ))}
@@ -90,7 +90,7 @@ const DetailDashboard = () => {
                       <div>Total Saldo</div>
                     </CTableDataCell>
                     <CTableDataCell style={{ textAlign: 'right' }}>
-                      <div>Rp. {formatRibuan(total)}</div>
+                      <div>{formatRibuan(total)}</div>
                     </CTableDataCell>
                   </CTableRow>
                 </CTableBody>

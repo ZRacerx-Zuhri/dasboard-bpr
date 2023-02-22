@@ -15,8 +15,8 @@ import {
   CTableHeaderCell,
   CTableRow,
 } from '@coreui/react'
-import CIcon from '@coreui/icons-react'
-import { cilLoopCircular } from '@coreui/icons'
+// import CIcon from '@coreui/icons-react'
+// import { cilLoopCircular } from '@coreui/icons'
 // import { useFetch } from '../../action'
 const moment = require('moment')
 moment.locale('id')
@@ -30,7 +30,7 @@ const Dashboard = () => {
   const handleSubmit = (e) => {
     e.preventDefault()
     const bpr_id = e.target.id
-    navigate(`/dashboard/detail/${bpr_id}`, { state: {} })
+    navigate(`/dashboard/detail/${bpr_id}`, { state: { bpr_id } })
   }
 
   useEffect(() => {
