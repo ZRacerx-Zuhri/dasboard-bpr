@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
+import * as XLSX from 'xlsx/xlsx.mjs'
+import moment from 'moment'
 // import { useFetch } from '../../../action'
 
 import {
@@ -8,6 +10,8 @@ import {
   CCardBody,
   CCardHeader,
   CCol,
+  CPagination,
+  CPaginationItem,
   CRow,
   CTable,
   CTableBody,
@@ -16,23 +20,30 @@ import {
   CTableHeaderCell,
   CTableRow,
 } from '@coreui/react'
+moment.locale('id')
 
 const DetailHistory = () => {
   let location = useLocation()
+  // const [allTrans, setAllTrans] = useState([])
   const [trans, setTrans] = useState([])
   const [bpr, setBpr] = useState([])
   const [rek, setRek] = useState([])
+  const [total, setTotal] = useState([])
   const [status, setStatus] = useState('')
 
   useEffect(() => {
     fetch(
-      `https://gw-dev-api.medtransdigital.com/dashboard/get_trans?bpr_id=${location.state.bprChoice}&nosbb=${location.state.transChoice}&status=${location.state.statusChoice}&fr=${location.state.fr}&to=${location.state.to}`,
+      `https://gw-dev-api.medtransdigital.com/dashboard/get_trans?bpr_id=${location.state.bprChoice}&nosbb=${location.state.transChoice}&status=${location.state.statusChoice}&fr=${location.state.fr}&to=${location.state.to}&page=${location.state.page}`,
     )
       .then((res) => res.json())
       .then((res) => {
-        console.log(res.data)
         if (res.data.length) {
           setTrans(res.data)
+          let totalrow = []
+          for (let i = 0; i < Math.ceil(parseInt(res.total) / 10); i++) {
+            totalrow.push(`${i + 1}`)
+          }
+          setTotal(totalrow)
         }
         if (location.state.statusChoice === 'all') {
           setStatus('All')
@@ -45,7 +56,51 @@ const DetailHistory = () => {
         setRek(res.rek)
       })
       .catch((err) => console.error(err))
-  }, [])
+  }, [
+    location.state.bprChoice,
+    location.state.fr,
+    location.state.statusChoice,
+    location.state.to,
+    location.state.transChoice,
+    location.state.page,
+  ])
+
+  const handlePage = (item) => {
+    const page = item
+    fetch(
+      `https://gw-dev-api.medtransdigital.com/dashboard/get_trans?bpr_id=${location.state.bprChoice}&nosbb=${location.state.transChoice}&status=${location.state.statusChoice}&fr=${location.state.fr}&to=${location.state.to}&page=${page}`,
+    )
+      .then((res) => res.json())
+      .then((res) => {
+        if (res.data.length) {
+          setTrans(res.data)
+        }
+      })
+      .catch((err) => console.error(err))
+  }
+
+  const getData = async () => {
+    await fetch(
+      `https://gw-dev-api.medtransdigital.com/dashboard/all_trans?bpr_id=${location.state.bprChoice}&nosbb=${location.state.transChoice}&status=${location.state.statusChoice}&fr=${location.state.fr}&to=${location.state.to}`,
+    )
+      .then((res) => res.json())
+      .then((res) => {
+        if (res.data.length) {
+          handleExport(res.data)
+        }
+      })
+      .catch((err) => console.error(err))
+  }
+
+  const handleExport = (data) => {
+    // console.log(data)
+    var wb = XLSX.utils.book_new()
+    var ws = XLSX.utils.json_to_sheet(data)
+
+    XLSX.utils.book_append_sheet(wb, ws, `Sheet1`)
+
+    XLSX.writeFile(wb, `History_Transaction_${moment().format('YYMMDD_HHmmss')}.xlsx`)
+  }
 
   const formatRibuan = (angka) => {
     var number_string = angka.toString().replace(/[^,\d]/g, ''),
@@ -139,7 +194,20 @@ const DetailHistory = () => {
                   ))}
                 </CTableBody>
               </CTable>
-              <CButton color="success" className="me-2 my-3">
+              <CPagination aria-label="Page navigation example">
+                <CPaginationItem aria-label="Previous" disabled>
+                  <span aria-hidden="true">&laquo;</span>
+                </CPaginationItem>
+                {total.map((item, index) => (
+                  <CPaginationItem onClick={() => handlePage(item)} value={item} key={index}>
+                    {item}
+                  </CPaginationItem>
+                ))}
+                <CPaginationItem aria-label="Next">
+                  <span aria-hidden="true">&raquo;</span>
+                </CPaginationItem>
+              </CPagination>
+              <CButton color="success" className="me-2 my-3" onClick={getData}>
                 Download Excel
               </CButton>
             </CCardBody>

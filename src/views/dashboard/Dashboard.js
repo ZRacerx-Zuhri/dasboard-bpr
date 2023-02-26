@@ -15,17 +15,14 @@ import {
   CTableHeaderCell,
   CTableRow,
 } from '@coreui/react'
-// import CIcon from '@coreui/icons-react'
-// import { cilLoopCircular } from '@coreui/icons'
-// import { useFetch } from '../../action'
+import { useSelector } from 'react-redux'
 const moment = require('moment')
 moment.locale('id')
 
 const Dashboard = () => {
   const navigate = useNavigate()
   const [bpr, setBpr] = useState([])
-  // const url = 'https://gw-dev-api.medtransdigital.com/dashboard/list_bpr'
-  // useFetch({ url, onSuccess: (data) => setBpr(data.data) }))
+  const UserLogin = useSelector((state) => state.UserLogin)
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -34,12 +31,16 @@ const Dashboard = () => {
   }
 
   useEffect(() => {
-    fetch('https://gw-dev-api.medtransdigital.com/dashboard/list_bpr')
-      .then((res) => res.json())
-      .then((res) => {
-        setBpr(res.data)
-      })
-      .catch((err) => console.error(err))
+    if (UserLogin.success) {
+      fetch('https://gw-dev-api.medtransdigital.com/dashboard/list_bpr')
+        .then((res) => res.json())
+        .then((res) => {
+          setBpr(res.data)
+        })
+        .catch((err) => console.error(err))
+    } else {
+      navigate(`/login`, {})
+    }
   }, [])
   return (
     <>

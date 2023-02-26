@@ -39,6 +39,11 @@ const _nav = [
     to: '/konsolidasi',
     icon: <CIcon icon={cilPuzzle} customClassName="nav-icon" />,
   },
+  {
+    component: CNavItem,
+    name: 'Logout',
+    to: '/logout',
+  },
   // {
   //   component: CNavTitle,
   //   name: 'Components',

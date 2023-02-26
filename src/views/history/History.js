@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
 import {
   CButton,
   CCard,
@@ -15,6 +14,8 @@ import {
   // CInputGroup,
   // CInputGroupText,
 } from '@coreui/react'
+import { useNavigate } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
 const History = () => {
   const [bprChoice, setBprChoice] = useState('')
@@ -28,28 +29,33 @@ const History = () => {
   const [MTO, setMTO] = useState('')
   const [DTO, setDTO] = useState('')
   const [TO, setTO] = useState(true)
-
+  const UserLogin = useSelector((state) => state.UserLogin)
   const navigate = useNavigate()
 
   useEffect(() => {
-    fetch('https://gw-dev-api.medtransdigital.com/dashboard/list_bpr')
-      .then((res) => res.json())
-      .then((res) => {
-        setBpr(res.data)
-      })
-      .catch((err) => console.error(err))
+    if (UserLogin.success) {
+      fetch('https://gw-dev-api.medtransdigital.com/dashboard/list_bpr')
+        .then((res) => res.json())
+        .then((res) => {
+          setBpr(res.data)
+        })
+        .catch((err) => console.error(err))
+    } else {
+      navigate(`/login`, {})
+    }
   }, [])
 
   const handleSubmit = (e) => {
     e.preventDefault()
     if (bprChoice !== '' && transChoice !== '' && statusChoice !== '') {
-      navigate(`/history/detail/${bprChoice}/${transChoice}/${statusChoice}`, {
+      navigate(`/history/detail/${bprChoice}/${transChoice}/${statusChoice}/1`, {
         state: {
           bprChoice,
           transChoice,
           statusChoice,
           fr: `20${YFR}-${MFR}-${DFR} 00:00:00`,
           to: `20${YTO}-${MTO}-${DTO} 23:59:59`,
+          page: 1,
         },
       })
     }

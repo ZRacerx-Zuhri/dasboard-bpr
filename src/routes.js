@@ -14,7 +14,7 @@ const routes = [
   { path: '/history', name: 'History', element: History },
   { path: '/konsolidasi', name: 'Detail Konsolidasi', element: DetailKonsolidasi },
   {
-    path: '/history/detail/:bpr_id/:no_rek/:status',
+    path: '/history/detail/:bpr_id/:no_rek/:status/:page',
     name: 'Detail History',
     element: DetailHistory,
   },

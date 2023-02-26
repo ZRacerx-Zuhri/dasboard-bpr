@@ -10,6 +10,8 @@ const loading = (
 
 // Containers
 const DefaultLayout = React.lazy(() => import('./layout/DefaultLayout'))
+const Login = React.lazy(() => import('./views/login/Login'))
+const Logout = React.lazy(() => import('./views/logout/Logout'))
 
 class App extends Component {
   render() {
@@ -17,6 +19,8 @@ class App extends Component {
       <HashRouter>
         <Suspense fallback={loading}>
           <Routes>
+            <Route exact path="/logout" name="Logout Page" element={<Logout />} />
+            <Route exact path="/login" name="Login Page" element={<Login />} />
             <Route path="*" name="Home" element={<DefaultLayout />} />
           </Routes>
         </Suspense>
