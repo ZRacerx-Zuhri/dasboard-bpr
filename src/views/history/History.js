@@ -227,11 +227,21 @@ const History = () => {
       e.target.value === '12'
     ) {
       let day = []
-      for (let i = 0; i < 31; i++) {
-        if (i < 9) {
-          day.push(`0${i + 1}`)
-        } else {
-          day.push(i + 1)
+      if (e.target.value === MFR) {
+        for (let i = parseInt(DFR) - 1; i < 31; i++) {
+          if (i < 9) {
+            day.push(`0${i + 1}`)
+          } else {
+            day.push(i + 1)
+          }
+        }
+      } else {
+        for (let i = 0; i < 31; i++) {
+          if (i < 9) {
+            day.push(`0${i + 1}`)
+          } else {
+            day.push(i + 1)
+          }
         }
       }
       setSDTO(day)
@@ -242,21 +252,41 @@ const History = () => {
       e.target.value === '11'
     ) {
       let day = []
-      for (let i = 0; i < 30; i++) {
-        if (i < 9) {
-          day.push(`0${i + 1}`)
-        } else {
-          day.push(i + 1)
+      if (e.target.value === MFR) {
+        for (let i = parseInt(DFR) - 1; i < 30; i++) {
+          if (i < 9) {
+            day.push(`0${i + 1}`)
+          } else {
+            day.push(i + 1)
+          }
+        }
+      } else {
+        for (let i = 0; i < 30; i++) {
+          if (i < 9) {
+            day.push(`0${i + 1}`)
+          } else {
+            day.push(i + 1)
+          }
         }
       }
       setSDTO(day)
     } else {
       let day = []
-      for (let i = 0; i < 28; i++) {
-        if (i < 9) {
-          day.push(`0${i + 1}`)
-        } else {
-          day.push(i + 1)
+      if (e.target.value === MFR) {
+        for (let i = parseInt(DFR) - 1; i < 28; i++) {
+          if (i < 9) {
+            day.push(`0${i + 1}`)
+          } else {
+            day.push(i + 1)
+          }
+        }
+      } else {
+        for (let i = 0; i < 28; i++) {
+          if (i < 9) {
+            day.push(`0${i + 1}`)
+          } else {
+            day.push(i + 1)
+          }
         }
       }
       setSDTO(day)
