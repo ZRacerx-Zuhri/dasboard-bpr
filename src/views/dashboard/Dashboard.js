@@ -41,7 +41,7 @@ const Dashboard = () => {
     } else {
       navigate(`/login`, {})
     }
-  }, [])
+  }, [UserLogin.success, navigate])
   return (
     <>
       <CRow>

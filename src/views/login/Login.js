@@ -31,7 +31,7 @@ const Login = () => {
       console.log('Test', UserLogin)
       navigate(`/`, {})
     }
-  }, [UserLogin.success])
+  }, [UserLogin.success, UserLogin, navigate])
 
   const handlerLogin = (e) => {
     dispatch(
