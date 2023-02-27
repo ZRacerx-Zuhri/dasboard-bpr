@@ -21,10 +21,9 @@ import { useNavigate } from 'react-router-dom'
 const Login = () => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
-  const [bpr, setBpr] = useState('')
+  const navigate = useNavigate()
   const dispatch = useDispatch()
   const UserLogin = useSelector((state) => state.UserLogin)
-  const navigate = useNavigate()
 
   useEffect(() => {
     if (UserLogin.success) {
@@ -37,7 +36,6 @@ const Login = () => {
     dispatch(
       login({
         user_id: username,
-        bpr_id: bpr,
         password: password,
       }),
     )
@@ -62,17 +60,6 @@ const Login = () => {
                         placeholder="Username"
                         onChange={(e) => {
                           setUsername(e.target.value)
-                        }}
-                      />
-                    </CInputGroup>
-                    <CInputGroup className="mb-3">
-                      <CInputGroupText>
-                        <CIcon icon={cilUser} />
-                      </CInputGroupText>
-                      <CFormInput
-                        placeholder="BPR ID"
-                        onChange={(e) => {
-                          setBpr(e.target.value)
                         }}
                       />
                     </CInputGroup>
