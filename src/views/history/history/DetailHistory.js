@@ -132,6 +132,7 @@ const DetailHistory = () => {
                 <CTableHead color="light">
                   <CTableRow>
                     <CTableHeaderCell>Date</CTableHeaderCell>
+                    <CTableHeaderCell>No SBB</CTableHeaderCell>
                     <CTableHeaderCell>Jenis Transaksi</CTableHeaderCell>
                     <CTableHeaderCell>Keterangan Transaksi</CTableHeaderCell>
                     <CTableHeaderCell>Data Transaksi</CTableHeaderCell>
@@ -148,6 +149,9 @@ const DetailHistory = () => {
                     <CTableRow v-for="item in tableItems" key={index}>
                       <CTableDataCell>
                         <div>{item.tgl_trans}</div>
+                      </CTableDataCell>
+                      <CTableDataCell>
+                        <div>{item.nosbb}</div>
                       </CTableDataCell>
                       <CTableDataCell>
                         {item.trx_code === '1000' ? (
