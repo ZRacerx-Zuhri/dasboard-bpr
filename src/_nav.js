@@ -44,6 +44,11 @@ const _nav = [
     name: 'Logout',
     to: '/logout',
   },
+  {
+    component: CNavItem,
+    name: 'Accordion',
+    to: '/register',
+  },
   // {
   //   component: CNavTitle,
   //   name: 'Components',

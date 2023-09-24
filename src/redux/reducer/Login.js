@@ -9,7 +9,7 @@ const axiosInstance = axios.create({
 const initialState = {
   data: null,
   fetching: false,
-  success: false,
+  success: true,
   failed: false,
 }
 
