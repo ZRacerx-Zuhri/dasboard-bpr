@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
+import React, { useState } from 'react'
+// import { useNavigate } from 'react-router-dom'
 
 import {
   CButton,
@@ -13,12 +13,12 @@ import {
   CFormLabel,
   CFormSelect,
   CInputGroup,
-  CInputGroupText,
+  // CInputGroupText,
   CRow,
 } from '@coreui/react'
-import CIcon from '@coreui/icons-react'
-import { cilLockLocked, cilUser } from '@coreui/icons'
-import { useDispatch, useSelector } from 'react-redux'
+// import CIcon from '@coreui/icons-react'
+// import { cilLockLocked, cilUser } from '@coreui/icons'
+// import { useDispatch, useSelector } from 'react-redux'
 const moment = require('moment')
 moment.locale('id')
 
@@ -28,16 +28,16 @@ const Register = () => {
   const [nama, setNama] = useState('')
   const [email, setEmail] = useState('')
   const [notel, setNotel] = useState('')
-  const [bday, setBday] = useState('')
+  // const [bday, setBday] = useState('')
   const [gender, setGender] = useState('')
   const [YFR, setYFR] = useState('')
   const [MFR, setMFR] = useState('')
   const [DFR, setDFR] = useState('')
   const [SDFR, setSDFR] = useState([])
   const [SYFR, setSYFR] = useState([])
-  const navigate = useNavigate()
-  const dispatch = useDispatch()
-  const UserLogin = useSelector((state) => state.UserLogin)
+  // const navigate = useNavigate()
+  // const dispatch = useDispatch()
+  // const UserLogin = useSelector((state) => state.UserLogin)
 
   // useEffect(() => {
   //   if (UserLogin.success) {
@@ -48,7 +48,7 @@ const Register = () => {
 
   const handlerRegister = (e) => {
     let data = {
-      token: "715f8ab555438f985b579844ea998866",
+      token: '715f8ab555438f985b579844ea998866',
       nama,
       email,
       notel,
